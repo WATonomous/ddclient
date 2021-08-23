@@ -5562,6 +5562,7 @@ sub nic_cloudflare_update {
 
             # Strip header
             $reply =~ s/^.*?\n\n//s;
+            $reply =~ s/^71e(.*)\n0/\1/s;
             my $response = eval {decode_json($reply)};
             unless ($response && $response->{result}) {
                 failed("updating %s: invalid json or result.", $domain);
